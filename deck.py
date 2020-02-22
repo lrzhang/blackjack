@@ -1,5 +1,3 @@
-import pdb
-
 # deck of cards
 
 
@@ -17,14 +15,20 @@ class Card():
     def __init__(self, value):
         self.suit = self.suitConv(value)
         self.value = value
-        self.numValue = min(value % 13, 9)  # be wary of 0 meaning ace
         self.name = self.nameDesc()
+        self.numValue = min(value % 13, 9)  # be wary of 0 meaning ace
+        # TODO may want to add in an abbreviation var
+        # temp = self.name.split(' ').remove("of")
+        # self.abbrev = str(temp[0][0] + temp[1][0])
+
+        # no longer using self.value as we only care about name and numValue
+        del self.value
 
     def suitConv(self, x):
         """Takes in integer value of the card and returns the suit"""
-        x = x / 13
+        x = int(x / 13)
         if(x < 4):
-            suit = ["Clubs", "Diamonds", "Hearts", "Spades"]
+            suit = ["clubs", "diamonds", "hearts", "spades"]
             return suit[x]
         else:
             pass
@@ -32,15 +36,21 @@ class Card():
     def nameDesc(self):
         """Returns a String describing the card"""
         faceCard = ["Jack", "Queen", "King"]
+        num = self.value % 13
         nameHolder = ""
-        if(0 < self.numValue < 10):
-            nameHolder = str(self.numValue + 1) + " of " + self.suit
-        elif(self.numValue == 0):  # 0 is an ace
+        if(0 < num < 10):
+            nameHolder = str(num + 1) + " of " + self.suit
+        elif(num == 0):  # 0 is an ace
             nameHolder = "Ace of " + self.suit
-        elif(self.numValue >= 10):
-            nameHolder = faceCard[self.numValue % 10] + " of " + self.suit
+        elif(num >= 10):
+            nameHolder = faceCard[num % 10] + " of " + self.suit
         return nameHolder
 
 
 def test():
     myDeck = Deck()
+    for card in myDeck.cards:
+        print(card.name)
+
+
+test()
