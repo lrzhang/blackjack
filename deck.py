@@ -16,7 +16,7 @@ class Card():
         self.suit = self.suitConv(value)
         self.value = value
         self.name = self.nameDesc()
-        self.numValue = min(value % 13, 9)  # be wary of 0 meaning ace
+        self.numValue = min(value % 13, 9) + 1  # be wary of 0 meaning ace
         # TODO may want to add in an abbreviation var
         # temp = self.name.split(' ').remove("of")
         # self.abbrev = str(temp[0][0] + temp[1][0])
@@ -46,11 +46,12 @@ class Card():
             nameHolder = faceCard[num % 10] + " of " + self.suit
         return nameHolder
 
-
-def test():
-    myDeck = Deck()
-    for card in myDeck.cards:
-        print(card.name)
-
-
-test()
+#
+# def test():
+#     myDeck = Deck()
+#     for card in myDeck.cards:
+#         print(card.name)
+#         print(card.numValue)
+#
+#
+# test()
